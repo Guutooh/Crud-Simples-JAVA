@@ -1,4 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ public class CRUD {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Nome da pessoa a ser cadastrada: ");
+        System.out.print("Informe o nome: ");
         String nome = input.nextLine();
 
         System.out.print("Digite o RG: ");
@@ -24,37 +23,57 @@ public class CRUD {
 
         System.out.print("Informe endereço completo: ");
         String endereco = input.nextLine();
+        System.out.println("\nCadastro Realizado com sucesso.");
 
         Pessoa cadastro = new Pessoa(nome, rg, idade, endereco);
 
         pessoas.add(cadastro);
 
-        System.out.println("\n");
+        //System.out.println("\n");
     }
 
     public void atualizarCadastro() {
 
         Scanner input = new Scanner(System.in);
-
-        System.out.print("Informe o RG da pessoa a ser atualizada:");
+        System.out.print("Informe o RG da pessoa a ser atualizada: ");
         int rg = input.nextInt();
         input.nextLine();
         for (Pessoa pessoa : pessoas) {
             if (pessoa.getRg() == rg) {
-                System.out.print("Informe o novo nome: ");
-                String nome = input.nextLine();
-                pessoa.setNome(nome);
+                System.out.println("Informe o que deseja alterar: \n[1] - Alterar nome \n[2] - Alterar idade \n[3] - Alterar endereço");
+                    int opcao = input.nextInt();
 
-                System.out.print("Informe a nova idade: ");
-                int idade = input.nextInt();
-                input.nextLine();
-                pessoa.setIdade(idade);
+                switch (opcao) {
 
-                System.out.print("Informe o novo endereco: ");
-                String endereco = input.nextLine();
-                pessoa.setEndereco(endereco);
+                    case 1:
+                        System.out.print("Informe o novo nome: ");
+                        String nome = input.nextLine();
+                        input.nextLine();
+                        pessoa.setNome(nome);
+                        System.out.println("Nome alterado com sucesso.");
+                        break;
 
-                System.out.print("Pessoa atualizada com sucesso!");
+                    case 2:
+                        System.out.print("Informe a nova idade: ");
+                        int idade = input.nextInt();
+                        input.nextLine();
+                        pessoa.setIdade(idade);
+                        System.out.println("Idade alterado com sucesso.");
+                        break;
+
+                    case 3:
+            
+                        System.out.print("Informe o novo endereco: ");
+                        String endereco = input.nextLine();
+                        input.nextLine();
+                        pessoa.setEndereco(endereco);
+                        System.out.print("Endereço atualizada com sucesso!");
+                        break;
+
+                    default:
+                        System.out.println("Opção invalida!");
+
+                }
                 System.out.println("\n");
                 return;
 
@@ -86,10 +105,10 @@ public class CRUD {
     }
 
     public void excluir() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         System.out.print("Informe o ID da pessoa a ser excluida:");
-        int rg = scanner.nextInt();
+        int rg = input.nextInt();
 
         for (Pessoa pessoa : pessoas) {
             if (pessoa.getRg() == rg) {
@@ -103,8 +122,8 @@ public class CRUD {
         System.out.println("Pessoa não encontrada.");
         System.out.println("\n");
 
+        input.close();
+
     }
-
-
 
 }
